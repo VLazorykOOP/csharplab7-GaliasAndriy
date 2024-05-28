@@ -14,9 +14,22 @@ namespace Lab7CSharp
         [STAThread]
         static void Main()
         {
+            //--------------- Task 1 -------------------//
+            /*Application.EnableVisualStyles();
+            Application.SetCompatibleTextRenderingDefault(false);
+            Form1 mainForm = new Form1();
+            mainForm.Show();
+            Application.Run();*/
+
+            //--------------- Task 2 -------------------//
+            /*Application.EnableVisualStyles();
+            Application.SetCompatibleTextRenderingDefault(false);
+            Application.Run(new Form2());*/
+
+            //--------------- Task 3 -------------------//
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Form1());
+            Application.Run(new Form3());
         }
     }
 }
