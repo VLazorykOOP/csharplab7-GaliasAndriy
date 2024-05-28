@@ -15,7 +15,7 @@ namespace Lab7CSharp
         static void Main()
         {
             //--------------- Task 1 -------------------//
-            /*Application.EnableVisualStyles();
+  /*          Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Form1 mainForm = new Form1();
             mainForm.Show();

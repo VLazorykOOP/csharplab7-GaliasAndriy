@@ -85,6 +85,26 @@ namespace Lab7CSharp
             }
         }
 
+        private void radioButton5_CheckedChanged(object sender, EventArgs e)
+        {
+            if (radioButton5.Checked)
+            {
+                label5.Text = "Параметри квадрата";
+
+                clearAllComponentsExceptLabel();
+
+                // Adding labels and input boxes
+                Label squareSideLabel = new Label();
+                squareSideLabel.Text = "Розмір сторони:";
+                squareSideLabel.Location = new Point(15, 35);
+                groupBox3.Controls.Add(squareSideLabel);
+
+                TextBox squareTextBox = new TextBox();
+                squareTextBox.Location = new Point(20, 58);
+                groupBox3.Controls.Add(squareTextBox);
+            }
+        }
+
         private void radioButton4_CheckedChanged(object sender, EventArgs e)
         {
             if (radioButton4.Checked)
@@ -303,6 +323,23 @@ namespace Lab7CSharp
                     }
                 }
             }
+            else if (radioButton5.Checked)
+            {
+                if (int.TryParse(groupBox3.Controls.OfType<TextBox>().FirstOrDefault()?.Text, out int size))
+                {
+                    if (size >= 5 && size <= 200)
+                    {
+                        figures.Add(new Square(size, selectedColor));
+                        label6.Text = "Фігуру додано";
+                        label6.ForeColor = Color.Green;
+                    }
+                    else
+                    {
+                        label6.Text = "Розмір сторони повинен бути (5-200px)";
+                        label6.ForeColor = Color.Red;
+                    }
+                }
+            }
             else
             {
                 label6.Text = "Введені хибні дані";
@@ -355,6 +392,28 @@ namespace Lab7CSharp
                 points[2] = new Point(x + width / 2, y + height);
                 points[3] = new Point(x, y + height);
                 points[4] = new Point(x + halfWidth, y);
+
+                return points;
+            }
+        }
+
+        public class Square : Figure
+        {
+            public Square(int size, Color color) : base(size, color) { }
+
+            public override void Draw(Graphics graphics, int x, int y, int width, Color color)
+            {
+                Pen pen = new Pen(color);
+                graphics.DrawPolygon(pen, GetSquarePoints(x, y, width));
+            }
+
+            private Point[] GetSquarePoints(int x, int y, int width)
+            {
+                Point[] points = new Point[4];
+                points[0] = new Point(x, y);
+                points[1] = new Point(x + width, y); 
+                points[2] = new Point(x + width, y + width); 
+                points[3] = new Point(x, y + width);
 
                 return points;
             }
@@ -554,7 +613,7 @@ namespace Lab7CSharp
                 else
                 {
                     //Rectangle rect = new Rectangle(); // Provide the required arguments
-                    if (figure is Pentagon)
+                    if (figure is Pentagon || figure is Square)
                     {
                         //Pentagon pentagon = new Pentagon();
                         FigureListItemCoupleParams item = new FigureListItemCoupleParams
